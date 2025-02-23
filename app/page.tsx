@@ -234,7 +234,7 @@ export default function Home() {
         {/* Big Map Box */}
         <div className={styles.mapBox}>
           <MapContainer
-            center={[mapCenter.lat, mapCenter.lng]}
+            center={[mapCenter.lat, mapCenter.lng] as [number, number]}
             zoom={10}
             style={{ height: "100%", width: "100%" }}
           >

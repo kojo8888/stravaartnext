@@ -6,7 +6,6 @@ import axios from "axios";
 import styles from "../styles/Home.module.css";
 import { MapContainer, TileLayer, Marker, GeoJSON, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import CitySearchNominatim from "@/components/CitySearchNominatim";
 
 // Import shadcn UI components (adjust paths based on your project)
 import { Button } from "@/components/ui/button";

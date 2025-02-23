@@ -6,6 +6,7 @@ import axios from "axios";
 import styles from "../styles/Home.module.css";
 import { MapContainer, TileLayer, Marker, GeoJSON, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import CitySearchNominatim from "@/components/CitySearchNominatim";
 
 // Import shadcn UI components (adjust paths based on your project)
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,9 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
+
+// Import the GeoJsonObject type
+import { GeoJsonObject } from "geojson";
 
 // Define a Coordinates interface for location data
 interface Coordinates {
@@ -96,8 +100,9 @@ const DrawingCanvas: React.FC<{ onDrawEnd: (points: { x: number; y: number }[]) 
 export default function Home() {
   const [userLocation, setUserLocation] = useState<Coordinates | null>(null);
   const [selectedCity, setSelectedCity] = useState<string>("");
+  // Instead of any, we now type result as GeoJsonObject | null
+  const [result, setResult] = useState<GeoJsonObject | null>(null);
   const [drawingData, setDrawingData] = useState<{ x: number; y: number }[]>([]);
-  const [result, setResult] = useState<any>(null);
 
   // Step 1: Get user's geolocation
   const getUserLocation = () => {
@@ -133,7 +138,8 @@ export default function Home() {
       drawing: drawingData,
     };
     try {
-      const response = await axios.post("http://localhost:8000/fit-heart", payload);
+      // Type the response as GeoJsonObject
+      const response = await axios.post<GeoJsonObject>("http://localhost:8000/fit-heart", payload);
       setResult(response.data);
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -205,7 +211,6 @@ export default function Home() {
                 {userLocation.lat.toFixed(4)}, {userLocation.lng.toFixed(4)}
               </p>
             )}
-            
           </div>
 
           {/* Box 2: Drawing Canvas */}

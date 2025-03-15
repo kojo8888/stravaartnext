@@ -138,7 +138,7 @@ export default function Home() {
     };
     try {
       // Type the response as GeoJsonObject
-      const response = await axios.post<GeoJsonObject>("../api/fit-heart", payload);
+      const response = await axios.post<GeoJsonObject>("https://heroku-fit-heart-4eb9f6ed56c2.herokuapp.com/", payload);
       setResult(response.data);
     } catch (error) {
       console.error("Error submitting data:", error);

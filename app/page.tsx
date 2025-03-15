@@ -138,7 +138,7 @@ export default function Home() {
     };
     try {
       // Type the response as GeoJsonObject
-      const response = await axios.post<GeoJsonObject>("http://localhost:8000/fit-heart", payload);
+      const response = await axios.post<GeoJsonObject>("/api/fit-heart", payload);
       setResult(response.data);
     } catch (error) {
       console.error("Error submitting data:", error);

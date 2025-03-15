@@ -1,0 +1,8 @@
+{
+    "functions": {
+      "api/fit-heart.py": {
+        "runtime": "python3.9"
+      }
+    }
+  }
+  

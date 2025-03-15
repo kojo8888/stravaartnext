@@ -11,7 +11,7 @@ from mangum import Mangum
 def generate_heart(num_points=200):
     t = np.linspace(0, 2 * np.pi, num_points)
     x = 16 * np.sin(t)**3
-    y = 13 * np.cos(t) - 5 * np.cos(2 * t) - 2 * np.cos(3 * t) - np.cos(4 * t)
+    y = 13 * np.cos(t) - 5 * np.cos(2*t) - 2 * np.cos(3*t) - np.cos(4*t)
     return np.vstack((x, y)).T
 
 def transform_heart(heart, scale, theta, tx, ty):
@@ -26,7 +26,7 @@ def cost_function(params, heart, kd_tree):
     return np.sum(distances ** 2)
 
 def run_optimization():
-    # Use a relative path – ensure your GeoJSON file is included in your repo (e.g. in a "public" or "data" folder)
+    # Use a relative path to your GeoJSON file (ensure it's included in your repo)
     gdf = gpd.read_file("../public/bavaria_bike_nodes.geojson")
     coords = np.array([(point.x, point.y) for point in gdf.geometry])
     kd_tree = KDTree(coords)
@@ -63,5 +63,5 @@ async def fit_heart(request: Request):
     geojson_result = json.loads(nearest_gdf.to_json())
     return geojson_result
 
-# Expose the app as a serverless function handler for Vercel
+# Wrap your app for serverless
 handler = Mangum(app)

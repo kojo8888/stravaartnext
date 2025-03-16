@@ -137,13 +137,14 @@ export default function Home() {
       drawing: drawingData,
     };
     try {
-      // Type the response as GeoJsonObject
-      const response = await axios.post<GeoJsonObject>("https://heroku-fit-heart-4eb9f6ed56c2.herokuapp.com/", payload);
+      // Call the API route using a relative URL.
+      const response = await axios.post<GeoJsonObject>("/api/fit-heart", payload);
       setResult(response.data);
     } catch (error) {
       console.error("Error submitting data:", error);
     }
   };
+  
 
   // Download the fitted result as JSON
   const handleDownload = () => {

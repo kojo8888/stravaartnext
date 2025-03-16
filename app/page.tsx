@@ -6,6 +6,7 @@ import axios from "axios";
 import styles from "../styles/Home.module.css";
 import { MapContainer, TileLayer, Marker, GeoJSON, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from 'leaflet';
 
 // Import shadcn UI components (adjust paths based on your project)
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,15 @@ import {
 
 // Import the GeoJsonObject type
 import { GeoJsonObject } from "geojson";
+
+// This ensures Leaflet uses your images from the public folder.
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: '/marker-icon-2x.png',
+  iconUrl: '/marker-icon.png',
+  shadowUrl: '/marker-shadow.png',
+});
 
 // Define a Coordinates interface for location data
 interface Coordinates {
